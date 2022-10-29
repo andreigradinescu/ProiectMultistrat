@@ -1,3 +1,3 @@
 # ProiectMultistrat
-Repository pentru proiectul aferent materiei Dezvoltarea Aplicatiilor Multistrat
+OrderEntity
 Scriu eu de acuma incolo ce mai e pe aici
