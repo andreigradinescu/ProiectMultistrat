@@ -14,8 +14,6 @@ import javax.persistence.*;
 @Entity
 public class Order implements Serializable {
 
-
-
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
