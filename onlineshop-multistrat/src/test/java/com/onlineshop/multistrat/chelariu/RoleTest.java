@@ -26,10 +26,6 @@ public class RoleTest {
     private RoleRepository roleRepository;
 
     @Test
-    void contextLoads() {
-    }
-
-    @Test
     public void testCreateFirstRole() {
         Rol roleAdmin = new Rol ("Admin", "manage everything");
         Rol saveRole = roleRepository.save(roleAdmin);
@@ -40,7 +36,6 @@ public class RoleTest {
     public void testCreateSecondRole() {
         Rol roleSalesPerson = new Rol ("SalesPerson", "manage product price," + " customers, shipping, orders and sales report");
         Rol roleEditor = new Rol ("Editor", "manage categories, brands" + " products, articles and menus");
-        Rol roleUser = new Rol ("Final User", "buying products," + " customers for our business");
-        roleRepository.saveAll (List.of (roleSalesPerson, roleEditor, roleUser));
+        roleRepository.saveAll (List.of (roleSalesPerson, roleEditor));
     }
 }

@@ -3,16 +3,19 @@ package com.onlineshop.multistrat.chelariu.entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "roles")
-public class Rol {
+public class Rol implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
@@ -35,7 +38,7 @@ public class Rol {
     }
 
     public Rol(String name, String description) {
-        super();
+        super ();
         this.name = name;
         this.description = description;
     }
@@ -44,5 +47,18 @@ public class Rol {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass (this) != Hibernate.getClass (o)) return false;
+        Rol rol = (Rol) o;
+        return id != null && Objects.equals (id, rol.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass ().hashCode ();
     }
 }

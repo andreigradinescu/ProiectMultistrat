@@ -1,7 +1,10 @@
 package com.onlineshop.multistrat.chelariu.services;
 
+import com.onlineshop.multistrat.chelariu.entities.Rol;
 import com.onlineshop.multistrat.chelariu.entities.User;
+import com.onlineshop.multistrat.chelariu.repositories.RoleRepository;
 import com.onlineshop.multistrat.chelariu.repositories.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,11 +15,14 @@ import java.util.Optional;
 public class UserServicesImpl implements UserServices {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServicesImpl(UserRepository userRepository) {
+    public UserServicesImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
-
 
     @Override
     public List<User> findAll() {
@@ -33,14 +39,7 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public Long create(User user) {
-        boolean userExist = (user.getId () != null);
-
-        if(userExist) {
-            userRepository.findById (user.getId ()).get();
-        } else{
-            System.out.println ("Do something to encode the password!");
-        }
-
+        encodePassword (user);
         return userRepository.save (user).getId ();
     }
 
@@ -62,5 +61,16 @@ public class UserServicesImpl implements UserServices {
     @Override
     public void delete(Long id) {
         userRepository.deleteById (id);
+    }
+
+    @Override
+    public void encodePassword(User user) {
+        String encodedPassword = passwordEncoder.encode (user.getPassword ());
+        user.setPassword (encodedPassword);
+    }
+
+    @Override
+    public List<Rol> listRole() {
+        return roleRepository.findAll ();
     }
 }
