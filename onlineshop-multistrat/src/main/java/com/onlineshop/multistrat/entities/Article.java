@@ -18,7 +18,7 @@ public class Article implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 128, nullable = false)
+    @Column(length = 128, nullable = false, name = "article_name")
     @NonNull
     private String name;
 
@@ -30,12 +30,9 @@ public class Article implements Serializable {
     @NonNull
     private BigDecimal price;
 
-    @Column(length = 64)
-    private String photos;
+    @Column(length = 64, name = "photo_url")
+    private String photo;
 
-    public void addArticle(){
-        return;
-    }
 
 
 
