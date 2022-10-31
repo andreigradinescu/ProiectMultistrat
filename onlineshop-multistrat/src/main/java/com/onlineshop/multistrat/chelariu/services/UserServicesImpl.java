@@ -71,6 +71,6 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public List<Rol> listRole() {
-        return roleRepository.findAll ();
+        return (List<Rol>) roleRepository.findAll ();
     }
 }

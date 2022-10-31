@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping
-    public Long User(@Valid @RequestBody User user) {
+    public Long User(@RequestBody User user) {
         return userServices.create (user);
     }
 

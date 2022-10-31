@@ -36,6 +36,7 @@ public class RoleTest {
     public void testCreateSecondRole() {
         Rol roleSalesPerson = new Rol ("SalesPerson", "manage product price," + " customers, shipping, orders and sales report");
         Rol roleEditor = new Rol ("Editor", "manage categories, brands" + " products, articles and menus");
-        roleRepository.saveAll (List.of (roleSalesPerson, roleEditor));
+        Rol rolUser = new Rol("User","view articles");
+        roleRepository.saveAll (List.of (roleSalesPerson, roleEditor, rolUser));
     }
 }
