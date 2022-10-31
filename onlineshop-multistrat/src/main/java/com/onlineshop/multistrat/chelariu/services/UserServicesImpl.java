@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -50,12 +51,8 @@ public class UserServicesImpl implements UserServices {
         if(userOptional.isPresent()){
             return userRepository.save (user).getId ();
         } else {
-            System.out.println ("Something went wrong!");
-
+           throw new NoSuchElementException ("User with id" + id + "does not exist!");
         }
-        return id;
-
-
     }
 
     @Override

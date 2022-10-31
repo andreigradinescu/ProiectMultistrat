@@ -5,6 +5,7 @@ import com.onlineshop.multistrat.chelariu.entities.User;
 import com.onlineshop.multistrat.chelariu.repositories.RoleRepository;
 import com.onlineshop.multistrat.chelariu.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -27,14 +28,17 @@ public class UserTest  {
     @Autowired
     private UserRepository userRepository;
 
+    @InjectMocks
+    private EncodePasswordTest encodePasswordTest;
+
     @Test
     public void testCreateNewUserWithOneRole() {
-        Rol roleAdmin = entityManager.find(Rol.class, 30);
-        User userWithOneRole = new User("chelariu.cosmin@yahoo.com", "beenear2022", "Yağmur", "Akşaç");
+        Rol roleAdmin = entityManager.find(Rol.class, 31);
+        User userWithOneRole = new User("andaaarei@yahoo.com", "andraaei20222", "Yağmur", "Akşaç");
         userWithOneRole.addRole(roleAdmin);
 
         User savedUser = userRepository.save(userWithOneRole);
-
+        encodePasswordTest.testEncodePassword ();
         assertThat(savedUser.getId()).isGreaterThan(0);
     }
 }
