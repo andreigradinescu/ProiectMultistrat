@@ -33,7 +33,7 @@ public class OrderController {
         orderServices.delete(id);
     }
     @PostMapping
-    public ResponseEntity<Long> User(@RequestBody Order order) {
+    public ResponseEntity<Long> Order(@RequestBody Order order) {
         try{
             return new ResponseEntity<>(orderServices.create (order), HttpStatus.CREATED);
         }catch (DataIntegrityViolationException data) {
@@ -43,7 +43,7 @@ public class OrderController {
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Long> User(@PathVariable("id") Long id, @Valid @RequestBody Order order) {
+    public ResponseEntity<Long> Order(@PathVariable("id") Long id, @Valid @RequestBody Order order) {
         try{
             return new ResponseEntity<>(orderServices.updateById (id, order), HttpStatus.OK);
         }catch (DataIntegrityViolationException data) {
