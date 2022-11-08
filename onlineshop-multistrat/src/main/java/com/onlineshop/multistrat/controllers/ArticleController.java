@@ -16,6 +16,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/v1/article")
 public class ArticleController {
 
     private final ArticleServices articleServices;

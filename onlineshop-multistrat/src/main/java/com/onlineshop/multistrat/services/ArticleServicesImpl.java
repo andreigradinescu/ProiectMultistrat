@@ -4,6 +4,7 @@ import com.onlineshop.multistrat.entities.Article;
 import com.onlineshop.multistrat.repositories.ArticleRepository;
 import org.springframework.stereotype.Service;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +40,7 @@ public class ArticleServicesImpl implements ArticleServices{
     public Long updateById(Long id, Article article) {
         Optional<Article> articleOptional = articleRepository.findById(id);
         if (articleOptional.isPresent()){
+            article.setId(id);
             return articleRepository.save(article).getId();
         } else {
             System.out.println("Something went wrong!");
