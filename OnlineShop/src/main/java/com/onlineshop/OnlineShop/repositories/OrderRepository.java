@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+//@Repository
 public interface OrderRepository extends CrudRepository<Order, Long> {
 
-    List<Order> getOrderListByUserId(Long userId,Order order);
+    List<Order> getOrderListByUserId(Long orderId);
 
 }

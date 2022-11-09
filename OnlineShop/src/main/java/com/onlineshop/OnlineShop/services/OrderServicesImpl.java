@@ -4,6 +4,7 @@ import com.onlineshop.OnlineShop.entities.Order;
 import com.onlineshop.OnlineShop.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,22 +18,32 @@ public class OrderServicesImpl implements OrderServices {
 
     @Override
     public List<Order> findAll() {
-        return (List<Order>) orderRepository.findAll();
+        List<Order> orderList = new ArrayList<>();
+
+        orderRepository.findAll().forEach(orderList::add);
+        return orderList;
     }
 
     @Override
     public Optional<Order> find(Long id) {
-        return Optional.empty();
+        return orderRepository.findById(id);
     }
 
     @Override
     public Long create(Order order) {
-        return null;
+        return orderRepository.save(order).getId();
     }
 
     @Override
     public Long updateById(Long id, Order order) {
-        return null;
+        Optional<Order>  orderOptional = orderRepository.findById(id);
+        if (orderOptional.isPresent()){
+            order.setId(id);
+            return orderRepository.save(order).getId();
+        } else {
+            System.out.println("Something went wrong!");
+        }
+        return id;
     }
 
     @Override
