@@ -38,10 +38,15 @@ public class ArticleController {
     public ResponseEntity<Optional<Article>> find(@PathVariable("id") @NotNull Long id){
         try{
             return new ResponseEntity<> (articleServices.find (id), HttpStatus.OK);
+        }catch (NoSuchElementException elementException){
+            throw new ResponseStatusException (HttpStatus.NOT_FOUND, elementException.getMessage ());
         }
-        catch (Throwable throwable){
+        catch (ResponseStatusException exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+            /*catch (Throwable throwable){
             throw new ResponseStatusException (HttpStatus.INTERNAL_SERVER_ERROR, throwable.getMessage ());
-        }
+        }*/
     }
 
     @PostMapping
@@ -63,8 +68,7 @@ public class ArticleController {
             throw new ResponseStatusException (HttpStatus.BAD_REQUEST, data.getMessage ());
         }catch (NoSuchElementException elementException){
             throw new ResponseStatusException (HttpStatus.NOT_FOUND, elementException.getMessage ());
-        }
-        catch (ResponseStatusException exception) {
+        } catch (ResponseStatusException exception) {
             throw new ResponseStatusException (HttpStatus.INTERNAL_SERVER_ERROR,exception.getMessage ());
         }
     }
@@ -79,6 +83,7 @@ public class ArticleController {
         } catch (Throwable throwable) {
             throw new ResponseStatusException (HttpStatus.INTERNAL_SERVER_ERROR,throwable.getMessage ());
         }
+
     }
 
 

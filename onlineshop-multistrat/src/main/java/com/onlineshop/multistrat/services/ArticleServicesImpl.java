@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -28,7 +29,12 @@ public class ArticleServicesImpl implements ArticleServices{
 
     @Override
     public Optional<Article> find(Long id) {
-        return articleRepository.findById(id);
+        Optional<Article> articleOptional = articleRepository.findById(id);
+        if (articleOptional.isPresent()) {
+            return articleRepository.findById(id);
+        }else {
+            throw new NoSuchElementException("Nu exista articolul cu id:" + id);
+        }
     }
 
     @Override
@@ -43,9 +49,9 @@ public class ArticleServicesImpl implements ArticleServices{
             article.setId(id);
             return articleRepository.save(article).getId();
         } else {
-            System.out.println("Something went wrong!");
+            throw new NoSuchElementException("Nu exista articolul cu id:" + id);
         }
-        return id;
+
 
     }
 
